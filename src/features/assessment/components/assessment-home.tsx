@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { TypewriterText } from "@/features/intro/components/typewriter-text";
 import { getProbabilityStyles } from "@/features/shared/lib/probability";
@@ -8,6 +8,7 @@ import { getProbabilityStyles } from "@/features/shared/lib/probability";
 import { evidenceItems } from "../data/evidence-items";
 
 const initialProbability = 92;
+const contactOverlayDelay = 2200;
 
 type ModuleOverlayProps = {
   activeModule: (typeof evidenceItems)[number];
@@ -248,6 +249,9 @@ export function AssessmentHome() {
   const [displayedProbability, setDisplayedProbability] =
     useState(initialProbability);
   const [showContactOverlay, setShowContactOverlay] = useState(false);
+  const contactOverlayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
 
   const activeModule =
     evidenceItems.find((item) => item.id === activeModuleId) ?? null;
@@ -298,6 +302,14 @@ export function AssessmentHome() {
     return () => clearInterval(timer);
   }, [displayedProbability, targetProbability]);
 
+  useEffect(() => {
+    return () => {
+      if (contactOverlayTimerRef.current) {
+        clearTimeout(contactOverlayTimerRef.current);
+      }
+    };
+  }, []);
+
   const probabilityStyles = getProbabilityStyles(displayedProbability);
 
   const openModule = (id: string) => {
@@ -319,7 +331,9 @@ export function AssessmentHome() {
         );
 
         if (nextProbability === 0) {
-          setShowContactOverlay(true);
+          contactOverlayTimerRef.current = setTimeout(() => {
+            setShowContactOverlay(true);
+          }, contactOverlayDelay);
         }
       }
 
