@@ -10,16 +10,16 @@ export type EvidenceItem = {
 
 export const evidenceItems: EvidenceItem[] = [
   {
-    id: "projects",
+    id: "contact",
     label: "Module 01",
-    title: "Projects",
-    summary: "Winning builds, open-source contributions, and full-stack product execution.",
+    title: "Dossier",
+    summary: "Education, contact links, and the final employability signal.",
     detail:
-      "Project evidence includes Bridger, a LinkedIn networking assistant that won 1st Overall at Born to Build, plus open-source contributions to Kubernetes, PyTorch, and Docker Compose.",
+      "Samarth is a Rutgers University student studying Computer Science and Data Science with a 3.8 GPA, backed by internships, shipping experience, open-source contributions, and direct product impact.",
     bullets: [
-      "Built a TypeScript Chrome extension with 50+ active users for storing and reusing LinkedIn profiles",
-      "Designed an LLM-powered outreach flow that cut draft time by 90% and added Gmail API one-click delivery",
-      "Shipped fixes to Kubernetes scheduler state, PyTorch error handling, and Docker Compose TTY rendering",
+      "Education: Rutgers University - New Brunswick, B.S. in Computer Science and Data Science, expected May 2028",
+      "Links: linkedin.com/in/samarth-verma2005, github.com/MaybeSam05, maybesam05.github.io",
+      "Contact: samarthverma1108@gmail.com",
     ],
     reduction: 22,
   },
@@ -38,18 +38,18 @@ export const evidenceItems: EvidenceItem[] = [
     reduction: 18,
   },
   {
-    id: "skills",
+    id: "projects",
     label: "Module 03",
-    title: "Skills",
-    summary: "Strong spread across full-stack, backend, data, and systems work.",
+    title: "Projects",
+    summary: "Winning builds, open-source contributions, and full-stack product execution.",
     detail:
-      "Technical coverage includes Python, TypeScript, JavaScript, Go, Java, and SQL, with hands-on work in React, FastAPI, PostgreSQL, MongoDB, AWS, Docker, Kafka, and GraphQL.",
+      "Project evidence includes Bridger, a LinkedIn networking assistant that won 1st Overall at Born to Build, plus open-source contributions to Kubernetes, PyTorch, and Docker Compose.",
     bullets: [
-      "Builds across product UI, backend services, data ingestion, and automation workflows",
-      "Comfortable with distributed systems, concurrency, CI/CD, and machine learning-adjacent tooling",
-      "Strong fit for roles that need both technical depth and product-minded execution",
+      "Built a TypeScript Chrome extension with 50+ active users for storing and reusing LinkedIn profiles",
+      "Designed an LLM-powered outreach flow that cut draft time by 90% and added Gmail API one-click delivery",
+      "Shipped fixes to Kubernetes scheduler state, PyTorch error handling, and Docker Compose TTY rendering",
     ],
-    reduction: 16,
+    reduction: 22,
   },
   {
     id: "leadership",
@@ -66,17 +66,17 @@ export const evidenceItems: EvidenceItem[] = [
     reduction: 14,
   },
   {
-    id: "contact",
+    id: "skills",
     label: "Module 05",
-    title: "Final Dossier",
-    summary: "Education, contact links, and the final employability signal.",
+    title: "Skills",
+    summary: "Strong spread across full-stack, backend, data, and systems work.",
     detail:
-      "Samarth is a Rutgers University student studying Computer Science and Data Science with a 3.8 GPA, backed by internships, shipping experience, open-source contributions, and direct product impact.",
+      "Technical coverage includes Python, TypeScript, JavaScript, Go, Java, and SQL, with hands-on work in React, FastAPI, PostgreSQL, MongoDB, AWS, Docker, Kafka, and GraphQL.",
     bullets: [
-      "Education: Rutgers University - New Brunswick, B.S. in Computer Science and Data Science, expected May 2028",
-      "Links: linkedin.com/in/samarth-verma2005, github.com/MaybeSam05, maybesam05.github.io",
-      "Contact: samarthverma1108@gmail.com",
+      "Builds across product UI, backend services, data ingestion, and automation workflows",
+      "Comfortable with distributed systems, concurrency, CI/CD, and machine learning-adjacent tooling",
+      "Strong fit for roles that need both technical depth and product-minded execution",
     ],
-    reduction: 22,
+    reduction: 16,
   },
 ];

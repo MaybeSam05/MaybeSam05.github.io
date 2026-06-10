@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 import { TypewriterText } from "@/features/intro/components/typewriter-text";
 import { getProbabilityStyles } from "@/features/shared/lib/probability";
@@ -18,6 +18,565 @@ type ModuleOverlayProps = {
 type ContactOverlayProps = {
   onClose: () => void;
 };
+
+type AnimatedCarouselCardProps = {
+  index: number;
+  children: ReactNode;
+};
+
+function AnimatedCarouselCard({ index, children }: AnimatedCarouselCardProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setIsVisible(true);
+    }, 140 + index * 130);
+
+    return () => clearTimeout(timeoutId);
+  }, [index]);
+
+  return (
+    <div
+      className={`shrink-0 transition-all duration-500 ease-out ${
+        isVisible
+          ? "translate-y-0 scale-100 opacity-100"
+          : "translate-y-4 scale-[0.985] opacity-0"
+      }`}
+    >
+      {children}
+    </div>
+  );
+}
+
+const experienceEntries = [
+  {
+    company: "GEICO",
+    role: "Software Engineer Intern",
+    period: "June 2026 - Present",
+    location: "New York, NY",
+    bullets: ["Incoming Summer 2026 Intern"],
+  },
+  {
+    company: "Rutgers-Web",
+    role: "Software Engineer Intern",
+    period: "August 2025 - Present",
+    location: "New Brunswick, NJ",
+    bullets: [
+      "Resolved 50+ tickets across bug fixes and features for a 150K+ user platform",
+      "Built a parking module synced with Rutgers APIs for permits, rules, and EV support",
+      "Developed a dashboard integrating 250+ Rutgers services into one interface",
+    ],
+  },
+  {
+    company: "VoiceBoticsAI",
+    role: "Software Engineer Intern",
+    period: "January 2025 - August 2025",
+    location: "Tampa, FL",
+    bullets: [
+      "Built a scraping pipeline ingesting 1500+ yacht listings daily into PostgreSQL",
+      "Developed a PHP/WordPress frontend serving live listings directly from the database",
+      "Built a React dashboard that reduced manual review by 90%",
+    ],
+  },
+  {
+    company: "ProspectorAI",
+    role: "Software Engineer Intern",
+    period: "November 2024 - January 2025",
+    location: "Berkeley, CA",
+    bullets: [
+      "Built a Zillow lead-generation pipeline tied to $600K in revenue",
+      "Integrated an open-source image staging model for empty property photos",
+      "Automated personalized realtor outreach and improved purchase rate by 40%",
+    ],
+  },
+];
+
+const skillEntries = [
+  {
+    section: "Languages",
+    label: "Core Stack",
+    items: ["Python", "TypeScript", "JavaScript", "Go", "Java", "SQL"],
+  },
+  {
+    section: "Frontend",
+    label: "Interface Work",
+    items: ["React", "TypeScript", "JavaScript", "GraphQL"],
+  },
+  {
+    section: "Backend",
+    label: "Service Layer",
+    items: ["FastAPI", "PostgreSQL", "MongoDB", "Kafka", "AWS"],
+  },
+  {
+    section: "Infra",
+    label: "Systems",
+    items: ["Kubernetes", "Docker", "Git", "CI/CD", "Distributed Systems", "Concurrency"],
+  },
+  {
+    section: "Execution",
+    label: "Applied Areas",
+    items: [
+      "Full-Stack Development",
+      "Backend Development",
+      "Data Engineering",
+      "Machine Learning",
+      "Automation Workflows",
+    ],
+  },
+];
+
+const leadershipEntries = [
+  {
+    section: "Teaching",
+    label: "Recitations",
+    items: [
+      "Led 3 weekly recitations for 45+ students on algorithms and data structures",
+      "Ran problem-solving sessions focused on implementation and reasoning",
+    ],
+  },
+  {
+    section: "Outcomes",
+    label: "Student Growth",
+    items: [
+      "Designed weekly quizzes and assignments for consistent reinforcement",
+      "Helped students improve from 30-40% to 85-100% on pre/post quizzes",
+    ],
+  },
+  {
+    section: "Execution",
+    label: "Course Support",
+    items: [
+      "Developed coding assignments with method outlines and hands-on implementation",
+      "Reinforced class concepts through structured practice and direct feedback",
+    ],
+  },
+];
+
+const dossierEntries = [
+  {
+    section: "Profile",
+    label: "Subject Overview",
+    items: [
+      "Samarth Verma",
+      "Computer Science and Data Science student",
+      "Rutgers University - New Brunswick",
+      "Expected May 2028",
+    ],
+  },
+  {
+    section: "Education",
+    label: "Academic Record",
+    items: [
+      "Bachelor of Science in Computer Science and Data Science",
+      "GPA: 3.8",
+      "Strong academic signal paired with production internship experience",
+    ],
+  },
+  {
+    section: "Links",
+    label: "Public Presence",
+    items: [
+      "maybesam05.github.io",
+      "linkedin.com/in/samarth-verma2005",
+      "github.com/MaybeSam05",
+    ],
+  },
+  {
+    section: "Contact",
+    label: "Direct Reach",
+    items: [
+      "samarthverma1108@gmail.com",
+      "Open to internship and software engineering opportunities",
+    ],
+  },
+];
+
+const projectEntries = [
+  {
+    section: "Bridger",
+    label: "1st Overall - Born to Build",
+    href: "https://chromewebstore.google.com/detail/bridger-linkedin-connecti/jgfbgbbhnpohdheagolckahiedhjjbgl",
+    hrefLabel: "Chrome Store",
+    items: [
+      "Built a TypeScript Chrome Extension with 50+ active users that scrapes and stores LinkedIn profiles for reuse",
+      "Designed a context-aware LLM flow that cut draft time by 90%",
+      "Implemented OAuth2 Google authentication and Gmail API one-click delivery",
+    ],
+  },
+  {
+    section: "Kubernetes",
+    label: "Open Source Contribution",
+    href: "https://github.com/kubernetes/kubernetes/commit/b75d1f6dca60658a5b293e4cedb90cdb4f0b3293",
+    hrefLabel: "Commit",
+    items: [
+      "Fixed scheduler inFlightPods memory leak and stale state caused by pod UID changes",
+      "Contributed in Go within a distributed systems codebase under CNCF",
+    ],
+  },
+  {
+    section: "PyTorch",
+    label: "Open Source Contribution",
+    href: "https://github.com/pytorch/pytorch/commit/4323649f842fb1f72b6dede5b188173910201af8",
+    hrefLabel: "Commit",
+    items: [
+      "Enhanced torch.dynamo error handling for GuardOnDataDependentSymNode",
+      "Improved exception chaining in a large-scale Python ML framework",
+    ],
+  },
+  {
+    section: "Docker Compose",
+    label: "Open Source Contribution",
+    href: "https://github.com/docker/compose/commit/02aaf253c8c264f881270864f3212b582c99b559",
+    hrefLabel: "Commit",
+    items: [
+      "Fixed TTY progress timer layout rendering bug",
+      "Added regression tests and shipped in Docker Compose v5.1.2",
+    ],
+  },
+];
+
+function ExperienceCarousel() {
+  return (
+    <div className="mt-5 space-y-3">
+      <div className="flex items-center justify-between gap-4 rounded-[1.1rem] border border-emerald-300/10 bg-black/35 px-4 py-3 sm:px-5">
+        <div>
+          <p className="text-[0.58rem] uppercase tracking-[0.28em] text-emerald-100/38">
+            Experience Record
+          </p>
+          <p className="mt-2 text-sm leading-6 text-emerald-50/66 sm:text-[0.92rem]">
+            Scroll horizontally through internship evidence from left to right.
+          </p>
+        </div>
+        <p className="hidden font-mono text-[0.62rem] uppercase tracking-[0.24em] text-emerald-300/60 sm:block">
+          Swipe / Scroll
+        </p>
+      </div>
+
+      <div className="overflow-x-auto pb-2 [scrollbar-color:rgba(74,222,128,0.4)_transparent] [scrollbar-width:thin]">
+        <div className="flex min-w-max gap-3 pr-2">
+          {experienceEntries.map((entry, index) => (
+            <AnimatedCarouselCard key={entry.company} index={index}>
+              <article className="relative w-[15.5rem] overflow-hidden rounded-[1.2rem] border border-emerald-300/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02)_34%,rgba(16,185,129,0.04))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_24px_rgba(110,231,183,0.04)] backdrop-blur-md sm:w-[17rem]">
+                <div className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-80" />
+                <div className="absolute right-0 top-4 h-20 w-24 rounded-full bg-emerald-200/10 blur-2xl" />
+
+                <div className="relative">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-[0.56rem] uppercase tracking-[0.28em] text-emerald-100/34">
+                        Position {index + 1}
+                      </p>
+                      <h3 className="mt-2.5 font-mono text-lg uppercase tracking-[0.14em] text-emerald-300/92 sm:text-[1.15rem]">
+                        {entry.company}
+                      </h3>
+                      <p className="mt-2 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-emerald-100/66 sm:text-[0.78rem]">
+                        {entry.role}
+                      </p>
+                    </div>
+
+                    <div className="rounded-full border border-emerald-300/12 bg-white/[0.05] px-2.5 py-1 text-[0.46rem] uppercase tracking-[0.2em] text-emerald-200/62">
+                      Logged
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-2 text-[0.53rem] uppercase tracking-[0.2em] text-emerald-100/38">
+                    <span className="rounded-full border border-emerald-300/10 bg-black/25 px-2.5 py-1.5">
+                      {entry.period}
+                    </span>
+                    <span className="rounded-full border border-emerald-300/10 bg-black/25 px-2.5 py-1.5">
+                      {entry.location}
+                    </span>
+                  </div>
+
+                  <div className="mt-4 space-y-2">
+                    {entry.bullets.map((bullet) => (
+                      <p
+                        key={bullet}
+                        className="pl-4 text-[0.86rem] leading-5.5 text-emerald-50/68"
+                      >
+                        <span className="-ml-4 mr-2 text-emerald-300/70">-</span>
+                        {bullet}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            </AnimatedCarouselCard>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SkillsCarousel() {
+  return (
+    <div className="mt-5 space-y-3">
+      <div className="flex items-center justify-between gap-4 rounded-[1.1rem] border border-emerald-300/10 bg-black/35 px-4 py-3 sm:px-5">
+        <div>
+          <p className="text-[0.58rem] uppercase tracking-[0.28em] text-emerald-100/38">
+            Skills Matrix
+          </p>
+          <p className="mt-2 text-sm leading-6 text-emerald-50/66 sm:text-[0.92rem]">
+            Scroll horizontally through technical categories and coverage.
+          </p>
+        </div>
+        <p className="hidden font-mono text-[0.62rem] uppercase tracking-[0.24em] text-emerald-300/60 sm:block">
+          Swipe / Scroll
+        </p>
+      </div>
+
+      <div className="overflow-x-auto pb-2 [scrollbar-color:rgba(74,222,128,0.4)_transparent] [scrollbar-width:thin]">
+        <div className="flex min-w-max gap-3 pr-2">
+          {skillEntries.map((entry, index) => (
+            <AnimatedCarouselCard key={entry.section} index={index}>
+              <article className="relative w-[15rem] overflow-hidden rounded-[1.2rem] border border-emerald-300/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02)_34%,rgba(16,185,129,0.04))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_24px_rgba(110,231,183,0.04)] backdrop-blur-md sm:w-[16.5rem]">
+              <div className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-80" />
+              <div className="absolute right-0 top-4 h-20 w-24 rounded-full bg-emerald-200/10 blur-2xl" />
+
+              <div className="relative">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[0.56rem] uppercase tracking-[0.28em] text-emerald-100/34">
+                      Cluster {index + 1}
+                    </p>
+                    <h3 className="mt-2.5 font-mono text-lg uppercase tracking-[0.14em] text-emerald-300/92 sm:text-[1.12rem]">
+                      {entry.section}
+                    </h3>
+                    <p className="mt-2 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-emerald-100/66 sm:text-[0.78rem]">
+                      {entry.label}
+                    </p>
+                  </div>
+
+                  <div className="rounded-full border border-emerald-300/12 bg-white/[0.05] px-2.5 py-1 text-[0.46rem] uppercase tracking-[0.2em] text-emerald-200/62">
+                    Logged
+                  </div>
+                </div>
+
+                <div className="mt-4 space-y-2">
+                  {entry.items.map((item) => (
+                    <p
+                      key={item}
+                      className="pl-4 text-[0.86rem] leading-5.5 text-emerald-50/68"
+                    >
+                      <span className="-ml-4 mr-2 text-emerald-300/70">-</span>
+                      {item}
+                    </p>
+                  ))}
+                </div>
+              </div>
+              </article>
+            </AnimatedCarouselCard>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LeadershipCarousel() {
+  return (
+    <div className="mt-5 space-y-3">
+      <div className="flex items-center justify-between gap-4 rounded-[1.1rem] border border-emerald-300/10 bg-black/35 px-4 py-3 sm:px-5">
+        <div>
+          <p className="text-[0.58rem] uppercase tracking-[0.28em] text-emerald-100/38">
+            Leadership Record
+          </p>
+          <p className="mt-2 text-sm leading-6 text-emerald-50/66 sm:text-[0.92rem]">
+            Scroll horizontally through teaching and mentorship evidence.
+          </p>
+        </div>
+        <p className="hidden font-mono text-[0.62rem] uppercase tracking-[0.24em] text-emerald-300/60 sm:block">
+          Swipe / Scroll
+        </p>
+      </div>
+
+      <div className="overflow-x-auto pb-2 [scrollbar-color:rgba(74,222,128,0.4)_transparent] [scrollbar-width:thin]">
+        <div className="flex min-w-max gap-3 pr-2">
+          {leadershipEntries.map((entry, index) => (
+            <AnimatedCarouselCard key={entry.section} index={index}>
+              <article className="relative w-[15rem] overflow-hidden rounded-[1.2rem] border border-emerald-300/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02)_34%,rgba(16,185,129,0.04))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_24px_rgba(110,231,183,0.04)] backdrop-blur-md sm:w-[16.5rem]">
+              <div className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-80" />
+              <div className="absolute right-0 top-4 h-20 w-24 rounded-full bg-emerald-200/10 blur-2xl" />
+
+              <div className="relative">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[0.56rem] uppercase tracking-[0.28em] text-emerald-100/34">
+                      Cluster {index + 1}
+                    </p>
+                    <h3 className="mt-2.5 font-mono text-lg uppercase tracking-[0.14em] text-emerald-300/92 sm:text-[1.12rem]">
+                      {entry.section}
+                    </h3>
+                    <p className="mt-2 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-emerald-100/66 sm:text-[0.78rem]">
+                      {entry.label}
+                    </p>
+                  </div>
+
+                  <div className="rounded-full border border-emerald-300/12 bg-white/[0.05] px-2.5 py-1 text-[0.46rem] uppercase tracking-[0.2em] text-emerald-200/62">
+                    Logged
+                  </div>
+                </div>
+
+                <div className="mt-4 space-y-2">
+                  {entry.items.map((item) => (
+                    <p
+                      key={item}
+                      className="pl-4 text-[0.86rem] leading-5.5 text-emerald-50/68"
+                    >
+                      <span className="-ml-4 mr-2 text-emerald-300/70">-</span>
+                      {item}
+                    </p>
+                  ))}
+                </div>
+              </div>
+              </article>
+            </AnimatedCarouselCard>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DossierCarousel() {
+  return (
+    <div className="mt-5 space-y-3">
+      <div className="flex items-center justify-between gap-4 rounded-[1.1rem] border border-emerald-300/10 bg-black/35 px-4 py-3 sm:px-5">
+        <div>
+          <p className="text-[0.58rem] uppercase tracking-[0.28em] text-emerald-100/38">
+            Dossier Record
+          </p>
+          <p className="mt-2 text-sm leading-6 text-emerald-50/66 sm:text-[0.92rem]">
+            Scroll horizontally through core identity, education, links, and contact.
+          </p>
+        </div>
+        <p className="hidden font-mono text-[0.62rem] uppercase tracking-[0.24em] text-emerald-300/60 sm:block">
+          Swipe / Scroll
+        </p>
+      </div>
+
+      <div className="overflow-x-auto pb-2 [scrollbar-color:rgba(74,222,128,0.4)_transparent] [scrollbar-width:thin]">
+        <div className="flex min-w-max gap-3 pr-2">
+          {dossierEntries.map((entry, index) => (
+            <AnimatedCarouselCard key={entry.section} index={index}>
+              <article className="relative w-[15rem] overflow-hidden rounded-[1.2rem] border border-emerald-300/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02)_34%,rgba(16,185,129,0.04))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_24px_rgba(110,231,183,0.04)] backdrop-blur-md sm:w-[16.5rem]">
+              <div className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-80" />
+              <div className="absolute right-0 top-4 h-20 w-24 rounded-full bg-emerald-200/10 blur-2xl" />
+
+              <div className="relative">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[0.56rem] uppercase tracking-[0.28em] text-emerald-100/34">
+                      Cluster {index + 1}
+                    </p>
+                    <h3 className="mt-2.5 font-mono text-lg uppercase tracking-[0.14em] text-emerald-300/92 sm:text-[1.12rem]">
+                      {entry.section}
+                    </h3>
+                    <p className="mt-2 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-emerald-100/66 sm:text-[0.78rem]">
+                      {entry.label}
+                    </p>
+                  </div>
+
+                  <div className="rounded-full border border-emerald-300/12 bg-white/[0.05] px-2.5 py-1 text-[0.46rem] uppercase tracking-[0.2em] text-emerald-200/62">
+                    Logged
+                  </div>
+                </div>
+
+                <div className="mt-4 space-y-2">
+                  {entry.items.map((item) => (
+                    <p
+                      key={item}
+                      className="pl-4 text-[0.86rem] leading-5.5 text-emerald-50/68"
+                    >
+                      <span className="-ml-4 mr-2 text-emerald-300/70">-</span>
+                      {item}
+                    </p>
+                  ))}
+                </div>
+              </div>
+              </article>
+            </AnimatedCarouselCard>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProjectsCarousel() {
+  return (
+    <div className="mt-5 space-y-3">
+      <div className="flex items-center justify-between gap-4 rounded-[1.1rem] border border-emerald-300/10 bg-black/35 px-4 py-3 sm:px-5">
+        <div>
+          <p className="text-[0.58rem] uppercase tracking-[0.28em] text-emerald-100/38">
+            Project Record
+          </p>
+          <p className="mt-2 text-sm leading-6 text-emerald-50/66 sm:text-[0.92rem]">
+            Scroll horizontally through shipped builds and open-source work.
+          </p>
+        </div>
+        <p className="hidden font-mono text-[0.62rem] uppercase tracking-[0.24em] text-emerald-300/60 sm:block">
+          Swipe / Scroll
+        </p>
+      </div>
+
+      <div className="overflow-x-auto pb-2 [scrollbar-color:rgba(74,222,128,0.4)_transparent] [scrollbar-width:thin]">
+        <div className="flex min-w-max gap-3 pr-2">
+          {projectEntries.map((entry, index) => (
+            <AnimatedCarouselCard key={entry.section} index={index}>
+              <article className="relative w-[15rem] overflow-hidden rounded-[1.2rem] border border-emerald-300/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02)_34%,rgba(16,185,129,0.04))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_24px_rgba(110,231,183,0.04)] backdrop-blur-md sm:w-[16.5rem]">
+              <div className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-80" />
+              <div className="absolute right-0 top-4 h-20 w-24 rounded-full bg-emerald-200/10 blur-2xl" />
+
+              <div className="relative">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[0.56rem] uppercase tracking-[0.28em] text-emerald-100/34">
+                      Cluster {index + 1}
+                    </p>
+                    <h3 className="mt-2.5 font-mono text-lg uppercase tracking-[0.14em] text-emerald-300/92 sm:text-[1.12rem]">
+                      {entry.section}
+                    </h3>
+                    <p className="mt-2 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-emerald-100/66 sm:text-[0.78rem]">
+                      {entry.label}
+                    </p>
+                  </div>
+
+                  <div className="rounded-full border border-emerald-300/12 bg-white/[0.05] px-2.5 py-1 text-[0.46rem] uppercase tracking-[0.2em] text-emerald-200/62">
+                    Logged
+                  </div>
+                </div>
+
+                <a
+                  href={entry.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-flex rounded-full border border-emerald-300/12 bg-white/[0.04] px-3 py-1.5 text-[0.56rem] uppercase tracking-[0.22em] text-emerald-200/72 transition hover:border-emerald-200/24 hover:bg-white/[0.07]"
+                >
+                  {entry.hrefLabel}
+                </a>
+
+                <div className="mt-4 space-y-2">
+                  {entry.items.map((item) => (
+                    <p
+                      key={item}
+                      className="pl-4 text-[0.86rem] leading-5.5 text-emerald-50/68"
+                    >
+                      <span className="-ml-4 mr-2 text-emerald-300/70">-</span>
+                      {item}
+                    </p>
+                  ))}
+                </div>
+              </div>
+              </article>
+            </AnimatedCarouselCard>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function ModuleOverlay({ activeModule, onClose }: ModuleOverlayProps) {
   const [showOverlayLoading, setShowOverlayLoading] = useState(true);
@@ -40,6 +599,12 @@ function ModuleOverlay({ activeModule, onClose }: ModuleOverlayProps) {
     };
   }, []);
 
+  const isExperienceModule = activeModule.id === "experience";
+  const isDossierModule = activeModule.id === "contact";
+  const isLeadershipModule = activeModule.id === "leadership";
+  const isProjectsModule = activeModule.id === "projects";
+  const isSkillsModule = activeModule.id === "skills";
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/78 px-4 backdrop-blur-md sm:px-8">
       <button
@@ -49,7 +614,15 @@ function ModuleOverlay({ activeModule, onClose }: ModuleOverlayProps) {
         onClick={onClose}
       />
 
-      <section className="relative w-full max-w-4xl rounded-[1.8rem] border border-emerald-200/14 bg-[linear-gradient(180deg,rgba(8,8,8,0.95),rgba(0,0,0,0.98))] p-4 shadow-[0_0_90px_rgba(16,185,129,0.12)] sm:p-6 lg:p-8">
+      <section className={`relative w-full rounded-[1.8rem] border border-emerald-200/14 bg-[linear-gradient(180deg,rgba(8,8,8,0.95),rgba(0,0,0,0.98))] p-4 shadow-[0_0_90px_rgba(16,185,129,0.12)] sm:p-6 lg:p-8 ${
+        isDossierModule ||
+        isExperienceModule ||
+        isLeadershipModule ||
+        isProjectsModule ||
+        isSkillsModule
+          ? "max-w-[72rem]"
+          : "max-w-4xl"
+      }`}>
         <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
 
         <div className="flex items-start justify-between gap-4 border-b border-emerald-300/10 pb-4">
@@ -77,7 +650,7 @@ function ModuleOverlay({ activeModule, onClose }: ModuleOverlayProps) {
               &gt; loading evidence module
             </p>
             <p className="mt-5 font-mono text-sm uppercase tracking-[0.22em] text-emerald-300/82">
-              Preparing {activeModule.title} dossier
+              Preparing {activeModule.title}
             </p>
             <div className="mt-6 h-4 rounded-full border border-emerald-300/12 bg-emerald-950/70 p-1">
               <div
@@ -89,6 +662,17 @@ function ModuleOverlay({ activeModule, onClose }: ModuleOverlayProps) {
         ) : null}
 
         {showOverlayContent ? (
+          isDossierModule ? (
+            <DossierCarousel />
+          ) : isExperienceModule ? (
+            <ExperienceCarousel />
+          ) : isLeadershipModule ? (
+            <LeadershipCarousel />
+          ) : isProjectsModule ? (
+            <ProjectsCarousel />
+          ) : isSkillsModule ? (
+            <SkillsCarousel />
+          ) : (
           <div className="mt-5 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="rounded-[1.3rem] border border-emerald-300/10 bg-black/35 p-5 sm:p-6">
               <p className="text-[0.62rem] uppercase tracking-[0.32em] text-emerald-100/40">
@@ -137,6 +721,7 @@ function ModuleOverlay({ activeModule, onClose }: ModuleOverlayProps) {
               </div>
             </div>
           </div>
+          )
         ) : null}
       </section>
     </div>
